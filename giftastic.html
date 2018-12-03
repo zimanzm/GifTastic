@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Giftastic</title>
+</head>
+
+<body>
+  <div class="container"></div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript">
+   
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=cat&api_key=dc6zaTOxFJmzC";
+
+    $.ajax({
+      url: queryURL,          
+      method: "GET"
+    }).then(function(response) {
+      console.log(response);
+      var gifArray = response.data;
+      for(var i = 0; i < gifArray.length; i++){
+        var image = $('<img>');
+        image.attr('src', gifArray[i].images.fixed_height.url);
+        $('.container').append(image);
+       
+      }
+      var state = $(this).attr("data-state");
+      
+        });
+        var image = $('<img>');
+                    image.attr('src', results[i].images.fixed_height_still.url);
+                    image.attr('data-still', results[i].images.fixed_height_still.url);
+                    image.attr('data-animate', results[i].images.fixed_height.url);
+                    image.attr('data-state', results[i].images.fixed_height_still.url);
+
+        
+        $("img").on("click", function() {
+          var state = $(this).attr("data-state");
+      if (state === "still") {
+        $(this).attr("image", $(this).attr("data-animate"));
+        $(this).attr("data-state", "animate");
+      } else {
+        $(this).attr("image", $(this).attr("data-still"));
+        $(this).attr("data-state", "still");
+      }
+        });
+  </script>
+
+</body>
+
+</html>
