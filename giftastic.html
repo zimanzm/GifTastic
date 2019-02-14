@@ -1,52 +1,154 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
+    <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
-<head>
-  <meta charset="utf-8">
-  <title>Giftastic</title>
-</head>
 
-<body>
-  <div class="container"></div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script type="text/javascript">
-   
-    var queryURL = "https://api.giphy.com/v1/gifs/search?q=cat&api_key=dc6zaTOxFJmzC";
 
-    $.ajax({
+        <title>Fantastic Gif!!</title>
+    </head>
+    <body>
+      <div class="container">
+        <div class="jumbotron" style="background-color: green">
+          <h1 class="text-center">GifTastic!</h1>
+        </div>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Search the magic!" aria-label="Search the magic!" aria-describedby="button-addon2" id="input">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" type="button" id="button">Search Meow!</button>
+            </div>
+          </div>
+          <div id = "gifArea"></div>
+
+
+  
+  <script>
+//     var queryURL = "https://api.giphy.com/v1/gifs/search?q=cat&api_key=dc6zaTOxFJmzC";
+//  var topics = ["cat", "sashimi", "fuji"]
+//     $.ajax({
+//       url: queryURL,          
+//       method: "GET"
+//     }).then(function(response) {
+//       console.log(response);
+//       var gifArray = response.data;
+//       for(var i = 0; i < gifArray.length; i++){
+//         var image = $('<img>');
+//         image.attr('src', gifArray[i].images.fixed_height.url);
+//         $('.container').append(image);
+       
+//       }
+//       var state = $(this).attr("data-state");
+      
+//         });
+//         var image = $('<img>');
+//                     image.attr('src', results[i].images.fixed_height_still.url);
+//                     image.attr('data-still', results[i].images.fixed_height_still.url);
+//                     image.attr('data-animate', results[i].images.fixed_height.url);
+//                     image.attr('data-state', results[i].images.fixed_height_still.url);
+
+        
+//         $("img").on("click", function() {
+//           var state = $(this).attr("data-state");
+//       if (state === "still") {
+//         $(this).attr("image", $(this).attr("data-animate"));
+//         $(this).attr("data-state", "animate");
+//       } else {
+//         $(this).attr("image", $(this).attr("data-still"));
+//         $(this).attr("data-state", "still");
+//       }
+//         });
+var topicsArray = ["cat", "sashimi", "fuji"];
+// function button() {
+    // $("#gifArea").empty();
+    for (var i = 0; i < topicsArray.length; i++) {
+        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + topicsArray + "api_key=dc6zaTOxFJmzC&limit=5";
+
+        $.ajax({
       url: queryURL,          
       method: "GET"
     }).then(function(response) {
       console.log(response);
       var gifArray = response.data;
-      for(var i = 0; i < gifArray.length; i++){
         var image = $('<img>');
         image.attr('src', gifArray[i].images.fixed_height.url);
-        $('.container').append(image);
+        $('#gifArea').append(image);
        
-      }
-      var state = $(this).attr("data-state");
-      
-        });
-        var image = $('<img>');
-                    image.attr('src', results[i].images.fixed_height_still.url);
-                    image.attr('data-still', results[i].images.fixed_height_still.url);
-                    image.attr('data-animate', results[i].images.fixed_height.url);
-                    image.attr('data-state', results[i].images.fixed_height_still.url);
+      })
 
-        
-        $("img").on("click", function() {
-          var state = $(this).attr("data-state");
-      if (state === "still") {
-        $(this).attr("image", $(this).attr("data-animate"));
-        $(this).attr("data-state", "animate");
-      } else {
-        $(this).attr("image", $(this).attr("data-still"));
-        $(this).attr("data-state", "still");
-      }
-        });
+    //     var button = $('#button');
+    //     button.addClass('topic');
+    //     button.attr('data-name', topicsArray[i]);
+    //     button.text(topicsArray[i]);
+    //     $("#gifArea").append();
+
+    // }
+    // // addTheGif();
+
+
+// $("#button").on('click', function() {
+//     let input = $('#input').val().trim();
+//     console.log($('#input'));
+//     topicsArray.push(input);
+//     button();
+//     return false;
+    
+//     if (input === '') {
+//         $("#input").val().trim();
+//     }
+// });
+// button();
+
+
+
+
+// function addTheGif() {
+//     $("#button").on('click', function() {
+//         var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + topicsArray + "api_key=dc6zaTOxFJmzC&limit=5";
+//         $.ajax({ url: queryURL, method: 'GET' })
+//             .done(function(response) {
+//                 var results = response.data;
+//                 console.log(response);
+
+//                 for (var i = 0; i < results.length; i++) {
+                    
+                  
+//                     var rating = results[i].rating;
+//                     let input = $('#input').text("Rating: " + rating);
+                    
+//                     var giphyImg = $('<img>');
+//                     giphyImg.attr('src', results[i].images.fixed_height_still.url);
+//                     giphyImg.attr('data-still', results[i].images.fixed_height_still.url);
+//                     giphyImg.attr('data-animate', results[i].images.fixed_height.url);
+//                     giphyImg.attr('data-state', results[i].images.fixed_height_still.url);
+
+                 
+
+//             }
+
+//                 $('img').on('click', function() {
+
+
+//                     var state = $(this).attr('data-state');
+
+//                     if (state == 'still') {
+//                         $(this).attr('src', $(this).data('animate'));
+//                         $(this).attr('data-state', 'animate');
+//                     } else {
+//                         $(this).attr('src', $(this).data('still'));
+//                         $(this).attr('data-state', 'still');
+//                     }
+
+//                 });
+//             });
+//     })
+    
   </script>
 
 </body>
 
 </html>
+
